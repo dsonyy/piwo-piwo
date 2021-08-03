@@ -33,10 +33,14 @@
       section {
         text-align: center;
         position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        padding: 64px;
+        font-size: 128px;
+        font-weight: 900;
+        width: 100vw;
+        height: 100vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
 
       section:hover {
@@ -49,8 +53,6 @@
       }
 
       span {
-        font-size: 128px;
-        font-weight: 900;
         padding: 0 16px 0 16px;
       }
 
@@ -64,6 +66,10 @@
         animation-duration: 2s;
         animation-iteration-count: infinite;
         animation-timing-function: ease-in;
+      }
+
+      .piwo:hover {
+        color: black;
       }
 
       @keyframes example {
@@ -83,6 +89,35 @@
         -ms-user-select: none;
         user-select: none;
       }
+
+      footer {
+        position: fixed;
+        left: 8px;
+        bottom: 8px;
+        font-weight: 900;
+      }
+
+      section:active {
+        transition: font-size 0.1s;
+        font-size: 150px;
+      }
+
+      nav {
+        position: fixed;
+        left: 8px;
+        top: 8px;
+        color: black;
+      }
+
+      a {
+        text-decoration: none;
+        color: black;
+        font-weight: 900;
+      }
+
+      a:hover {
+        color: #927027;
+      }
     </style>
   </head>
   <body>
@@ -90,35 +125,41 @@
       <span><i class="fas fa-beer"></i></span>
       <span id="points">0</span>
     </section>
-    <script>
-      var decimal_level = 10;
-      var counter = 0;
-      var adder = 1;
-      var base_color = document.body.style.backgroundColor;
-      function add() {
-        counter = counter + adder;
-        var points_elemnt = document.getElementById("points");
-        points_elemnt.innerHTML = counter;
-        checkpossiblechange();
-        addPiwo();
-      }
-      function checkpossiblechange() {
-        if (counter > decimal_level) {
-          document.body.style.backgroundColor = 0xe88300; //add saturation (now its just assigning value)
-          //divElement.style.backgroundColor = "hsl(155,100%,30%)";
-          decimal_level += 10;
-        }
-      }
-      function addPiwo() {
-        const max = window.innerWidth - 32;
-        const min = 32;
-        const elem = document.createElement("div");
-        elem.innerHTML =
-          "<div class='piwo' style='left:" +
-          (Math.random() * (max - min) + min) +
-          "px'><i class='fas fa-beer'></i></div>";
-        document.body.appendChild(elem);
-      }
-    </script>
+    <footer class="noselect">
+      Created with love for <i class="fas fa-beer"></i>.
+    </footer>
+    <nav>
+      <a href="https://github.com/dsonyy/piwo-piwo">GitHub</a>
+    </nav>
   </body>
+  <script>
+    var decimal_level = 10;
+    var counter = 0;
+    var adder = 1;
+    var base_color = document.body.style.backgroundColor;
+    function add() {
+      counter = counter + adder;
+      var points_elemnt = document.getElementById("points");
+      points_elemnt.innerHTML = counter;
+      checkpossiblechange();
+      addPiwo();
+    }
+    function checkpossiblechange() {
+      if (counter > decimal_level) {
+        document.body.style.backgroundColor = 0xe88300; //add saturation (now its just assigning value)
+        //divElement.style.backgroundColor = "hsl(155,100%,30%)";
+        decimal_level += 10;
+      }
+    }
+    function addPiwo() {
+      const max = window.innerWidth - 32;
+      const min = 32;
+      const elem = document.createElement("div");
+      elem.innerHTML =
+        "<div class='piwo' style='left:" +
+        (Math.random() * (max - min) + min) +
+        "px'><i class='fas fa-beer'></i></div>";
+      document.body.appendChild(elem);
+    }
+  </script>
 </html>

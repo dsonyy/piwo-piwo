@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Piwo Piwo</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu+Condensed&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      html {
+        margin: 0;
+        font-family: "Ubuntu Condensed", sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background-color: #ffc444;
+        height: 100vh;
+      }
+
+      section {
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        padding: 64px;
+      }
+
+      section:hover {
+        cursor: pointer;
+      }
+
+      header {
+        font-size: 32px;
+        font-weight: 900;
+      }
+
+      span {
+        font-size: 128px;
+        font-weight: 900;
+        padding: 0 16px 0 16px;
+      }
+
+      .piwo {
+        color: #927027;
+        position: fixed;
+        font-size: 48px;
+        left: 10px;
+
+        animation-name: example;
+        animation-duration: 2s;
+        animation-iteration-count: infinite;
+        animation-timing-function: ease-in;
+      }
+
+      @keyframes example {
+        from {
+          top: -40px;
+        }
+        to {
+          top: calc(100vh + 40px);
+        }
+      }
+
+      .noselect {
+        -webkit-touch-callout: none;
+        -webkit-user-select: none;
+        -khtml-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="noselect" id="piwo" onclick="add()">
+      <span><i class="fas fa-beer"></i></span>
+      <span id="points">0</span>
+    </section>
+    <script>
+      var decimal_level = 10;
+      var counter = 0;
+      var adder = 1;
+      var base_color = document.body.style.backgroundColor;
+      function add() {
+        counter = counter + adder;
+        var points_elemnt = document.getElementById("points");
+        points_elemnt.innerHTML = counter;
+        checkpossiblechange();
+        addPiwo();
+      }
+      function checkpossiblechange() {
+        if (counter > decimal_level) {
+          document.body.style.backgroundColor = 0xe88300; //add saturation (now its just assigning value)
+          //divElement.style.backgroundColor = "hsl(155,100%,30%)";
+          decimal_level += 10;
+        }
+      }
+      function addPiwo() {
+        const max = window.innerWidth - 32;
+        const min = 32;
+        const elem = document.createElement("div");
+        elem.innerHTML =
+          "<div class='piwo' style='left:" +
+          (Math.random() * (max - min) + min) +
+          "px'><i class='fas fa-beer'></i></div>";
+        document.body.appendChild(elem);
+      }
+    </script>
+  </body>
+</html>

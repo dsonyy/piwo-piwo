@@ -136,8 +136,9 @@
     var decimal_level = 10;
     var counter = 0;
     var adder = 1;
-    var base_color = [255, 196, 68];
-    var base_piwo_color = [146, 112, 39];
+    var base_color = [41, 100, 63];
+    var base_piwo_color = [41, 58, 36];
+    var piwo_new_color = 'hsl(41, 58%, 36%)';
     function add() {
       counter = counter + adder;
       let points_element = document.getElementById("points");
@@ -146,26 +147,29 @@
       addPiwo();
     }
     function check_possible_color_change() {
-      if (counter > decimal_level) {
+      if (counter >= decimal_level) {
         decimal_level += 10;
         for(var i = 0; i < 3; i++){
           if(base_color[i] - 3 >= 0)base_color[i] -= 3;
           if(base_piwo_color[i] - 3 >= 0 ) base_piwo_color[i] -= 3;
         }
+        //update piwo color value
+        piwo_new_color = 'hsl(' + base_piwo_color[0].toString(10) + ', ' + 
+          base_piwo_color[1].toString(10) + '%, ' + 
+          base_piwo_color[2].toString(10) + '%)'
+
         //set the updated rgb value as a background color
         document.body.style.backgroundColor =
-        'rgb(' + base_color[0].toString(10) + ', ' + 
-        base_color[1].toString(10) + ', ' + 
-        base_color[2].toString(10) + ')';
+        'hsl(' + base_color[0].toString(10) + ', ' + 
+        base_color[1].toString(10) + '%, ' + 
+        base_color[2].toString(10) + '%)';
 
         //make all the beers darker
         let elements = document.getElementsByClassName('piwo'); 
 	      for(var i = 0; i < elements.length; i++){
-	    	  elements[i].style.color = 'rgb(' + 
-          base_piwo_color[0].toString(10) + ', ' + 
-          base_piwo_color[1].toString(10) + ', ' + 
-          base_piwo_color[2].toString(10) + ')';
+	    	  elements[i].style.color = piwo_new_color;
       	}
+        
       }
     }
     function addPiwo() {
@@ -175,7 +179,7 @@
       elem.innerHTML =
         "<div class='piwo' style='left:" +
         (Math.random() * (max - min) + min) +
-        "px'><i class='fas fa-beer'></i></div>";
+        "px; color:"+ piwo_new_color +"'><i class='fas fa-beer'></i></div>";
       document.body.appendChild(elem);
     }
   </script>

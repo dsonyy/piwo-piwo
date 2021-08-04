@@ -136,19 +136,36 @@
     var decimal_level = 10;
     var counter = 0;
     var adder = 1;
-    var base_color = document.body.style.backgroundColor;
+    var base_color = [255, 196, 68];
+    var base_piwo_color = [146, 112, 39];
     function add() {
       counter = counter + adder;
-      var points_elemnt = document.getElementById("points");
-      points_elemnt.innerHTML = counter;
-      checkpossiblechange();
+      let points_element = document.getElementById("points");
+      points_element.innerHTML = counter;
+      check_possible_color_change();
       addPiwo();
     }
-    function checkpossiblechange() {
+    function check_possible_color_change() {
       if (counter > decimal_level) {
-        document.body.style.backgroundColor = 0xe88300; //add saturation (now its just assigning value)
-        //divElement.style.backgroundColor = "hsl(155,100%,30%)";
         decimal_level += 10;
+        for(var i = 0; i < 3; i++){
+          if(base_color[i] - 3 >= 0)base_color[i] -= 3;
+          if(base_piwo_color[i] - 3 >= 0 ) base_piwo_color[i] -= 3;
+        }
+        //set the updated rgb value as a background color
+        document.body.style.backgroundColor =
+        'rgb(' + base_color[0].toString(10) + ', ' + 
+        base_color[1].toString(10) + ', ' + 
+        base_color[2].toString(10) + ')';
+
+        //make all the beers darker
+        let elements = document.getElementsByClassName('piwo'); 
+	      for(var i = 0; i < elements.length; i++){
+	    	  elements[i].style.color = 'rgb(' + 
+          base_piwo_color[0].toString(10) + ', ' + 
+          base_piwo_color[1].toString(10) + ', ' + 
+          base_piwo_color[2].toString(10) + ')';
+      	}
       }
     }
     function addPiwo() {

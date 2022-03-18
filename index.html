@@ -148,10 +148,10 @@
     }
     function check_possible_color_change() {
       if (counter >= decimal_level) {
-        decimal_level += 10;
+        decimal_level += 1;
         for(var i = 0; i < 3; i++){
-          if(base_color[i] - 3 >= 0)base_color[i] -= 3;
-          if(base_piwo_color[i] - 3 >= 0 ) base_piwo_color[i] -= 3;
+          if(base_color[i] - 3 >= 0)base_color[i] -= 0.4;
+          if(base_piwo_color[i] - 3 >= 0 ) base_piwo_color[i] -= 0.4;
         }
         //update piwo color value
         piwo_new_color = 'hsl(' + base_piwo_color[0].toString(10) + ', ' + 
